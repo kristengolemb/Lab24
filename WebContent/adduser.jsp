@@ -24,5 +24,7 @@
 		else
 			out.println("Error; user not added");
 	%>
+	<br><br>
+	<a href="listusers.jsp">List Users</a>
 </body>
 </html>

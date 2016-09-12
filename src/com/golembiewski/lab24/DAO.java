@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
 public class DAO {
@@ -44,6 +45,21 @@ public class DAO {
 		hibernateSession.close();
 
 		return i;
+	}
+
+	public static void modifyUser(User user) {
+		if (factory == null)
+			setupFactory();
+		// Get current session
+		Session hibernateSession = factory.openSession();
+		// Begin transaction
+		hibernateSession.getTransaction().begin();
+		user.setID(user.getID());
+		hibernateSession.merge(user);
+		// Commit transaction
+		hibernateSession.getTransaction().commit();
+
+		hibernateSession.close();
 	}
 
 	public static void deleteUser(int id) {

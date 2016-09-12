@@ -9,18 +9,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>User Deleted</title>
+<title>User Modified</title>
 </head>
 <body>
-	<p>User deleted.</p>
+	<jsp:useBean id="obj" class="com.golembiewski.lab24.User">
+	</jsp:useBean>
+	<jsp:setProperty property="*" name="obj" />
+	<h1>The selected account has been changed.</h1>
 	<%
-		String req = request.getQueryString();
-		String[] requests = req.split("&");
-		for (String s : requests) {
-			String[] pair = s.split("=");
-			DAO.deleteUser(Integer.valueOf(pair[1]));
-		}
+		DAO.modifyUser(obj);
 	%>
+	<br>
+	<br>
 	<a href="listusers.jsp">List Users</a>
+</body>
+
 </body>
 </html>
